@@ -84,9 +84,9 @@ public class Main extends SceneTransformer {
 	static boolean DEBUG = false;
 	public final static boolean DUMP_JIMPLE = false; //default: false. Set to true to create Jimple code instead of APK
 	public final static boolean VALIDATE = false; //Set to true to apply some consistency checks. Set to false to get past validation exceptions and see the generated code. Note: these checks are more strict than the Dex verifier and may fail at some obfuscated, though valid classes
-	private final static String androidJAR = "./libs/android-14.jar"; //required for CH resolution
-	private final static String libJars = "./jars/a3t_symbolic.jar"; //libraries
-	private final static String modelClasses = "./mymodels/src"; 	//Directory where user-defined model classes reside
+	private final static String androidJAR = "libs/android-14.jar"; //required for CH resolution
+	private final static String libJars = "jars/a3t_symbolic.jar"; //libraries
+	private final static String modelClasses = "mymodels/src"; 	//Directory where user-defined model classes reside
 	private static String apk = null;
 	private static boolean OMIT_MANIFEST_MODIFICATION = false;		// Manifest is modified to support writing to sdcard
 	private static boolean LIMIT_TO_CALL_PATH = true; 				// Limit instrumentation to methods along the CP to reflection use?
@@ -142,8 +142,9 @@ public class Main extends SceneTransformer {
 	
 	private static void setSootOptions() {
 		//restore the class path because of soot.G.reset() in calculateSourcesSinksEntrypoints:
-		Options.v().set_soot_classpath("./libs/android-19.jar"+":"+libJars+":"+modelClasses + ":" + apk);
-		Scene.v().setSootClassPath("./libs/android-19.jar"+":"+libJars+":"+modelClasses + ":" + apk);
+		Options.v().set_soot_classpath("libs/android-19.jar"+","+libJars+","+modelClasses + "," + apk);
+		//Options.v().set_soot_classpath("libs/android-19.jar");
+		Scene.v().setSootClassPath("libs/android-19.jar"+","+libJars+","+modelClasses + "," + apk);
 		
 		Options.v().set_no_bodies_for_excluded(true);
 		Options.v().set_src_prec(Options.src_prec_apk);
@@ -207,7 +208,7 @@ public class Main extends SceneTransformer {
 		}
 		apk = args[0];
 
-		Options.v().set_soot_classpath("./libs/android-19.jar"+":"+libJars+":"+modelClasses + ":" + apk);
+		Options.v().set_soot_classpath("libs/android-19.jar"+","+libJars+","+modelClasses + "," + apk);
 		
 		// inject correct dummy main:
 		SetupApplication setupApplication = new SetupApplication(androidJAR, apk);
