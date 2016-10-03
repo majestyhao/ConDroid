@@ -49,6 +49,7 @@ import acteve.symbolic.integer.SymbolicFloat;
 import acteve.symbolic.integer.SymbolicInteger;
 import acteve.symbolic.integer.SymbolicLong;
 import acteve.symbolic.integer.Types;
+import android.util.Log;
 
 //import dalvik.system.VMStack;
 //import android.util.Slog;
@@ -575,7 +576,7 @@ public class Util
 	/**
 	 * @param	e	Symbolic value of conditional.
 	 *				It is the original value of the conditional, not the one obtained by xor-ing
-	 *				it with the result of calling {@link #hijack()} just before the conditional.
+	 *				it with the result of calling {@link } just before the conditional.
 	 * @param	branchId	Static ID of conditional.
 	 * @param	b	Concrete value of conditional.  
 	 */
@@ -674,7 +675,7 @@ public class Util
 		if(settingsFile.exists()) {
 			Mylog.e("PRE_A3T_in_readconf"," exists");
 
-			android.util.Slog.e("A3T", "FOUND FILE: " + settingsFile + " pid = " + android.os.Process.myPid());
+			Log.e("A3T", "FOUND FILE: " + settingsFile + " pid = " + android.os.Process.myPid());
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(settingsFile));
 				String s;
@@ -697,7 +698,7 @@ public class Util
 		} else {
 			
 			//this is a process such as keyboard that we dont want to trace
-			android.util.Slog.e("A3T", "FOUND not FILE: " + settingsFile + " pid = " + android.os.Process.myPid());
+			Log.e("A3T", "FOUND not FILE: " + settingsFile + " pid = " + android.os.Process.myPid());
 			monitor = false;
 		}		
 		return monitor;

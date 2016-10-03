@@ -222,7 +222,7 @@ public class Main extends SceneTransformer {
 		}
 		
 		setSootOptions();
-		
+
 		//Create dummy main method referencing all entry points
 		SootMethod dummyMain = setupApplication.getEntryPointCreator().createDummyMain();
 

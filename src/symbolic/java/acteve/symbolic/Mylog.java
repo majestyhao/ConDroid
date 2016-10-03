@@ -31,6 +31,8 @@
 
 package acteve.symbolic;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
@@ -99,8 +101,8 @@ public class Mylog
 				}
 			}
 			e("A3T_METHS", Util.reachedMethsStr());
-			android.util.Slog.e("Mylog", "Shutting down");
-			
+			Log.e("Mylog", "Shutting down");
+
 			if(writer != null) {
 				if(writer.checkError())
 					throw new Error("error in writing to mylog.txt");
@@ -111,16 +113,16 @@ public class Mylog
 			try{				
 				String pkg = new BufferedReader(new FileReader(PKG_FILE)).readLine();
 				File killedfile = new File(LOG_DIR_PREFIX+pkg+KILLED_FILE);
-				android.util.Slog.e("Mylog","Creating kill file " + killedfile.getAbsolutePath());
+				Log.e("Mylog","Creating kill file " + killedfile.getAbsolutePath());
 				BufferedWriter writer = new BufferedWriter(new FileWriter(killedfile));
 				writer.write(0);
 				writer.flush();
 				writer.close();
-				android.util.Slog.e("Mylog","kill file exists" + killedfile.exists());
+				Log.e("Mylog","kill file exists" + killedfile.exists());
 			}catch(IOException e){
 				throw new Error(e);
 			}
-			android.util.Slog.e("Mylog", "About to exit.");
+			Log.e("Mylog", "About to exit.");
 		}
 	}
 }
