@@ -1,0 +1,183 @@
+public class de.ecspride.Activity1 extends android.app.Activity
+{
+    private static java.lang.String a;
+
+    static void <clinit>()
+    {
+        <de.ecspride.Activity1: java.lang.String a> = null;
+        return;
+    }
+
+    public void <init>()
+    {
+        de.ecspride.Activity1 $r0;
+
+        $r0 := @this: de.ecspride.Activity1;
+        specialinvoke $r0.<android.app.Activity: void <init>()>();
+        return;
+    }
+
+    private void a()
+    {
+        de.ecspride.Activity1 $r0;
+        android.widget.Toast $r1;
+        android.telephony.SmsManager $r2;
+
+        $r0 := @this: de.ecspride.Activity1;
+        $r1 = staticinvoke <android.widget.Toast: android.widget.Toast makeText(android.content.Context,java.lang.CharSequence,int)>($r0, "SMS sent.", 1);
+        virtualinvoke $r1.<android.widget.Toast: void show()>();
+        $r2 = staticinvoke <android.telephony.SmsManager: android.telephony.SmsManager getDefault()>();
+        virtualinvoke $r2.<android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>("+49", null, "damn", null, null);
+        return;
+    }
+
+    static void a(de.ecspride.Activity1)
+    {
+        de.ecspride.Activity1 $r0;
+
+        $r0 := @parameter0: de.ecspride.Activity1;
+        specialinvoke $r0.<de.ecspride.Activity1: void a()>();
+        return;
+    }
+
+    protected void onCreate(android.os.Bundle)
+    {
+        de.ecspride.Activity1 $r0;
+        android.os.Bundle $r1;
+        de.ecspride.a $r2;
+        android.view.View $r3;
+        android.widget.Button $r4;
+
+        $r0 := @this: de.ecspride.Activity1;
+        $r1 := @parameter0: android.os.Bundle;
+        specialinvoke $r0.<android.app.Activity: void onCreate(android.os.Bundle)>($r1);
+        virtualinvoke $r0.<de.ecspride.Activity1: void setContentView(int)>(2130903040);
+        $r3 = virtualinvoke $r0.<de.ecspride.Activity1: android.view.View findViewById(int)>(2131230720);
+        $r4 = (android.widget.Button) $r3;
+        $r2 = new de.ecspride.a;
+        specialinvoke $r2.<de.ecspride.a: void <init>(de.ecspride.Activity1)>($r0);
+        virtualinvoke $r4.<android.widget.Button: void setOnClickListener(android.view.View$OnClickListener)>($r2);
+        return;
+    }
+
+    protected void onResume()
+    {
+        de.ecspride.Activity1 $r0;
+        android.widget.Toast $r1;
+        android.content.Context $r2;
+
+        $r0 := @this: de.ecspride.Activity1;
+        specialinvoke $r0.<android.app.Activity: void onResume()>();
+        $r1 = staticinvoke <android.widget.Toast: android.widget.Toast makeText(android.content.Context,java.lang.CharSequence,int)>($r0, "onResume() called.", 1);
+        virtualinvoke $r1.<android.widget.Toast: void show()>();
+        $r2 = virtualinvoke $r0.<android.content.Context: android.content.Context getApplicationContext()>();
+        nop;
+        return;
+    }
+}
+class de.ecspride.a extends java.lang.Object implements android.view.View$OnClickListener
+{
+    final de.ecspride.Activity1 a;
+
+    void <init>(de.ecspride.Activity1)
+    {
+        de.ecspride.a $r0;
+        de.ecspride.Activity1 $r1;
+
+        $r0 := @this: de.ecspride.a;
+        $r1 := @parameter0: de.ecspride.Activity1;
+        $r0.<de.ecspride.a: de.ecspride.Activity1 a> = $r1;
+        specialinvoke $r0.<java.lang.Object: void <init>()>();
+        return;
+    }
+
+    public void onClick(android.view.View)
+    {
+        de.ecspride.a $r0;
+        android.view.View $r1;
+        de.ecspride.Activity1 $r2;
+
+        $r0 := @this: de.ecspride.a;
+        $r1 := @parameter0: android.view.View;
+        $r2 = $r0.<de.ecspride.a: de.ecspride.Activity1 a>;
+        staticinvoke <de.ecspride.Activity1: void a(de.ecspride.Activity1)>($r2);
+        return;
+    }
+}
+public class de.ecspride.Activity1 extends android.app.Activity
+{
+    private static java.lang.String a;
+
+    static void <clinit>()
+    {
+        <de.ecspride.Activity1: java.lang.String a> = null;
+        return;
+    }
+
+    public void <init>()
+    {
+        de.ecspride.Activity1 $r0;
+
+        $r0 := @this: de.ecspride.Activity1;
+        specialinvoke $r0.<android.app.Activity: void <init>()>();
+        return;
+    }
+
+    private void a()
+    {
+        de.ecspride.Activity1 $r0;
+        android.widget.Toast $r1;
+        android.telephony.SmsManager $r2;
+
+        $r0 := @this: de.ecspride.Activity1;
+        $r1 = staticinvoke <android.widget.Toast: android.widget.Toast makeText(android.content.Context,java.lang.CharSequence,int)>($r0, "SMS sent.", 1);
+        virtualinvoke $r1.<android.widget.Toast: void show()>();
+        $r2 = staticinvoke <android.telephony.SmsManager: android.telephony.SmsManager getDefault()>();
+        virtualinvoke $r2.<android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>("+49", null, "damn", null, null);
+        return;
+    }
+
+    static void a(de.ecspride.Activity1)
+    {
+        de.ecspride.Activity1 $r0;
+
+        $r0 := @parameter0: de.ecspride.Activity1;
+        specialinvoke $r0.<de.ecspride.Activity1: void a()>();
+        return;
+    }
+
+    protected void onCreate(android.os.Bundle)
+    {
+        de.ecspride.Activity1 $r0;
+        android.os.Bundle $r1;
+        de.ecspride.a $r2;
+        android.view.View $r3;
+        android.widget.Button $r4;
+
+        $r0 := @this: de.ecspride.Activity1;
+        $r1 := @parameter0: android.os.Bundle;
+        specialinvoke $r0.<android.app.Activity: void onCreate(android.os.Bundle)>($r1);
+        virtualinvoke $r0.<de.ecspride.Activity1: void setContentView(int)>(2130903040);
+        $r3 = virtualinvoke $r0.<de.ecspride.Activity1: android.view.View findViewById(int)>(2131230720);
+        $r4 = (android.widget.Button) $r3;
+        $r2 = new de.ecspride.a;
+        specialinvoke $r2.<de.ecspride.a: void <init>(de.ecspride.Activity1)>($r0);
+        virtualinvoke $r4.<android.widget.Button: void setOnClickListener(android.view.View$OnClickListener)>($r2);
+        return;
+    }
+
+    protected void onResume()
+    {
+        de.ecspride.Activity1 $r0;
+        android.widget.Toast $r1;
+        android.content.Context $r2;
+
+        $r0 := @this: de.ecspride.Activity1;
+        specialinvoke $r0.<android.app.Activity: void onResume()>();
+        $r1 = staticinvoke <android.widget.Toast: android.widget.Toast makeText(android.content.Context,java.lang.CharSequence,int)>($r0, "onResume() called.", 1);
+        virtualinvoke $r1.<android.widget.Toast: void show()>();
+        $r2 = virtualinvoke $r0.<android.content.Context: android.content.Context getApplicationContext()>();
+        nop;
+        return;
+    }
+}

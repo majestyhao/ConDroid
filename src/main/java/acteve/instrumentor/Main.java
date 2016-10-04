@@ -53,6 +53,7 @@ import java.util.zip.ZipException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
+import fu.hao.utils.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -76,12 +77,14 @@ import soot.util.Chain;
 import acteve.explorer.Utils;
 
 public class Main extends SceneTransformer {
+    private static final String TAG = Main.class.getSimpleName();
+
 	public static Logger log = LoggerFactory.getLogger(Main.class);
 	private static Config config;
 	private static Set<SootMethod> methodsToInstrument = new HashSet<SootMethod>();
 	private static Map<String, List<String>> uninstrumentedClasses = new HashMap<String, List<String>>();
 	private static final String dummyMainClassName = "acteve.symbolic.DummyMain";
-	static boolean DEBUG = false;
+	static boolean DEBUG = true;
 	public final static boolean DUMP_JIMPLE = false; //default: false. Set to true to create Jimple code instead of APK
 	public final static boolean VALIDATE = false; //Set to true to apply some consistency checks. Set to false to get past validation exceptions and see the generated code. Note: these checks are more strict than the Dex verifier and may fail at some obfuscated, though valid classes
 	private final static String androidJAR = "libs/android-14.jar"; //required for CH resolution
@@ -142,9 +145,9 @@ public class Main extends SceneTransformer {
 	
 	private static void setSootOptions() {
 		//restore the class path because of soot.G.reset() in calculateSourcesSinksEntrypoints:
-		Options.v().set_soot_classpath("libs/android-19.jar"+","+libJars+","+modelClasses + "," + apk);
+		Options.v().set_soot_classpath("libs/android-19.jar"+";"+libJars+";"+modelClasses + ";" + apk);
 		//Options.v().set_soot_classpath("libs/android-19.jar");
-		Scene.v().setSootClassPath("libs/android-19.jar"+","+libJars+","+modelClasses + "," + apk);
+		Scene.v().setSootClassPath("libs/android-19.jar"+";"+libJars+";"+modelClasses + ";" + apk);
 		
 		Options.v().set_no_bodies_for_excluded(true);
 		Options.v().set_src_prec(Options.src_prec_apk);
@@ -208,7 +211,7 @@ public class Main extends SceneTransformer {
 		}
 		apk = args[0];
 
-		Options.v().set_soot_classpath("libs/android-19.jar"+","+libJars+","+modelClasses + "," + apk);
+		Options.v().set_soot_classpath("libs/android-19.jar"+";"+libJars+";"+modelClasses + ";" + apk);
 		
 		// inject correct dummy main:
 		SetupApplication setupApplication = new SetupApplication(androidJAR, apk);
@@ -229,6 +232,7 @@ public class Main extends SceneTransformer {
 
 		Scene.v().setEntryPoints(Collections.singletonList(dummyMain));
 		Scene.v().addBasicClass(dummyMain.getDeclaringClass().getName(), SootClass.BODIES);
+
 		Scene.v().loadNecessaryClasses();
 		
 		//Register all application classes for instrumentation
@@ -305,8 +309,10 @@ public class Main extends SceneTransformer {
 			List<SootMethod> targetMethods = MethodUtils.findReflectiveLoadingMethods(entryPoints);
 			if (DEBUG) {
 				log.debug("Found the following target methods:");
+                Log.msg(TAG, "Found the following target methods:");
 				for (SootMethod m : targetMethods){
 					log.debug("  Signature: {}", m.getSignature());
+                    Log.msg(TAG, "Signature: " + m.getSignature());
 				}
 			}
 			
@@ -356,6 +362,7 @@ public class Main extends SceneTransformer {
 						entryClasses.add(entryEdges.next().tgt().getDeclaringClass());
 					}
 				}
+                System.err.println("Inserted Method: " + lcMethodToExtend);
 				ih.insertCallsToLifecycleMethods(lcMethodToExtend, methodsToInstrument);
 			} catch (Exception e) {
 				log.error("Exception while inserting calls to lifecycle methods:", e);
