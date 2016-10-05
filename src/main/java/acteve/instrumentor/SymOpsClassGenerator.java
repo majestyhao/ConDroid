@@ -34,6 +34,7 @@ package acteve.instrumentor;
 import java.util.ArrayList;
 import java.util.List;
 
+import fu.hao.utils.Log;
 import soot.ArrayType;
 import soot.BooleanType;
 import soot.ByteType;
@@ -58,8 +59,9 @@ import soot.jimple.NullConstant;
 import soot.jimple.Stmt;
 import soot.jimple.StringConstant;
 
-public class SymOpsClassGenerator
-{
+public class SymOpsClassGenerator {
+	private static final String TAG = SymOpsClassGenerator.class.getSimpleName();
+
     private static SootClass klass;
     private static final int mod = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
     private static final String PACKAGE_NAME = "acteve.symbolic.";
@@ -247,6 +249,14 @@ public class SymOpsClassGenerator
 		Stmt op1CastAssignment = G.jimple.newAssignStmt(op1Cast, G.jimple.newCastExpr(op1, op1Cast.getType()));
 
 		Local locString = G.newLocal( RefType.v("java.lang.String"));
+
+		SootClass logClass = Scene.v().loadClassAndSupport("android.util.Log");
+
+		Log.bb(TAG, "number: " + logClass.getMethods().size());
+		for (SootMethod logMethod : logClass.getMethods()) {
+			Log.bb(TAG, logMethod);
+		}
+
 		G.invoke(G.staticInvokeExpr(Scene.v().getMethod("<android.util.Log: int d(java.lang.String,java.lang.String)>").makeRef(), StringConstant.v("CONDROID"),StringConstant.v(opMethodName + " called")));
 		
 		G.iff(G.neExpr(op1, NullConstant.v()), op1CastAssignment);

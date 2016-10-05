@@ -76,6 +76,8 @@ import soot.options.Options;
 import soot.util.Chain;
 import acteve.explorer.Utils;
 
+import static soot.SootClass.SIGNATURES;
+
 public class Main extends SceneTransformer {
     private static final String TAG = Main.class.getSimpleName();
 
@@ -148,6 +150,8 @@ public class Main extends SceneTransformer {
 		Options.v().set_soot_classpath("libs/android-19.jar"+";"+libJars+";"+modelClasses + ";" + apk);
 		//Options.v().set_soot_classpath("libs/android-19.jar");
 		Scene.v().setSootClassPath("libs/android-19.jar"+";"+libJars+";"+modelClasses + ";" + apk);
+        Options.v().set_force_android_jar(
+                "C:/Users/hao/Downloads/android-sdk-windows/platforms");
 		
 		Options.v().set_no_bodies_for_excluded(true);
 		Options.v().set_src_prec(Options.src_prec_apk);
@@ -184,6 +188,8 @@ public class Main extends SceneTransformer {
 		Options.v().set_dynamic_package(
 				Arrays.asList(new String[] { "acteve.symbolic.", "com.android", "models.", "org.json", "org.apache", "org.w3c",
 						"org.xml", "junit", "javax", "javax.crypto"}));
+
+        Scene.v().addBasicClass("android.util.Log", SIGNATURES);
 
 	}
 
